@@ -79,6 +79,8 @@ app.post('/register', function (req,res){
 	user.email = req.body.email;
 	user.passwd = req.body.passwd;
 
+	user.role = req.body.role;
+
 	var image = gravatar.url(user.email);
 
 	if (image != null){
@@ -111,9 +113,43 @@ app.post('/edit', function (req,res){
 	})
 })
 
+app.post('/book', function (req, res){
+
+	var book = new Book();
+
+	book.title = req.body.title;
+	book.author = req.session._id;
+
+	/*var image = req.files.image.path;
+	console.log(req.files.image);
+	var path = __dirname+"/static/images/"+book._id+".png";
+	fs.rename(image, path, function (err){
+		
+		if (err) throw err;
+	  });
+	book.imageURL = path;*/
+	book.save(function (err){
+
+		if (!err) console.log (book.title+ " saved :)");
+	})
+})
+
 
 
 app.listen(PORT, function(err){
 
 	console.log('Up and Running on '+PORT);
 })
+
+function needsLogin(req, res, next){
+	
+	if (req.session.user){
+		next();
+	}
+	else {
+		
+		console.log('not allowed');
+		res.send('Not allowed in here... Please, login..');
+	}
+}
+
