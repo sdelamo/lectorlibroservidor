@@ -98,7 +98,8 @@ app.post('/register', function (req,res){
 
 app.post('/edit', function (req,res){
 
-	var id = req.body._id;
+	var id = req.session.user._id;
+
 	User.findById(id, function (err, user){
 
 		user.name = req.body.name;
@@ -115,7 +116,7 @@ app.post('/edit', function (req,res){
 	})
 })
 
-app.post('/book', function (req, res){
+app.post('/book/new', function (req, res){
 
 	var book = new Book();
 
@@ -123,6 +124,7 @@ app.post('/book', function (req, res){
 	book.author = req.session._id;
 
 	/*var image = req.files.image.path;
+	if image
 	console.log(req.files.image);
 	var path = __dirname+"/static/images/"+book._id+".png";
 	fs.rename(image, path, function (err){
@@ -133,6 +135,25 @@ app.post('/book', function (req, res){
 	book.save(function (err){
 
 		if (!err) console.log (book.title+ " saved :)");
+	})
+})
+
+app.post('book/edit', function (req, res){
+
+	var id = req.body._id;
+	Book.findById(id, function (err, book){
+
+		book.title = req.body.title;
+
+		/*var image = req.files.image.path;
+		if image
+	console.log(req.files.image);
+	var path = __dirname+"/static/images/"+book._id+".png";
+	fs.rename(image, path, function (err){
+		
+		if (err) throw err;
+	  });
+	book.imageURL = path;*/
 	})
 })
 
