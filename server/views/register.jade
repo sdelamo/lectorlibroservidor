@@ -1,0 +1,35 @@
+div#wrap.clearfix	
+	ul.menu
+		li
+			a Home
+		li
+			a(href="/write")
+				span.icon.medium.gray(data-icon="7")
+				span Write a document
+		li.current
+			a(href="")
+				span.icon.medium.gray(data-icon="7")
+				span register
+		li
+			form(action="", method="")
+				input(type="text", placeholder="name@domain.com")
+				input(type="password", placeholder="Password")
+				input(type="button", value="Log In")
+	div.col_12
+		h1.center Register
+		p.center(style="font-size:14px;color:#black;margin-bottom:40px;") 
+			|Choose your account
+			|You can be an author or a reader
+			|Have fun
+		form(action="", method="")
+			label(for="Email") Email
+			input(type="text", name="Email", placeholder="name@domain.com")
+			label(for="Name") Name
+			input(type="text", name="Name", placeholder="Name Surname")
+			label(for="pass") Password
+			input(type="text", name="pass", placeholder="password")
+			label (for="type")Select type
+			select#type
+				option(value="0")Choose Account Type
+				option(value="1")Author
+				option(value="2")Reader
