@@ -72,6 +72,16 @@ app.get('/', function (req, res){
 	res.render('root.jade');
 })
 
+app.post('/login', function (req,res){
+
+	User.findOne({email:req.body.email, passwd:req.body.passwd}, function (err, user){
+
+		console.log(user);
+		req.session.user = user;
+
+		res.redirect('/');
+	})
+})
 app.post('/register', function (req,res){
 
 	var user = new User();
@@ -96,7 +106,7 @@ app.post('/register', function (req,res){
 	})
 })
 
-app.post('/edit', function (req,res){
+app.post('/edit', needsLogin, function (req,res){
 
 	var id = req.session.user._id;
 
