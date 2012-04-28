@@ -55,6 +55,8 @@ app.configure(function(){
 	})}));
 	app.use(express.static(__dirname+'/static'));
 });
+app.set('views', __dirname+'/views');
+
 
 Book.find({}, function (err, books){
 
@@ -67,7 +69,7 @@ Book.find({}, function (err, books){
 
 app.get('/', function (req, res){
 
-	res.send('Hello :)');
+	res.render('root.jade');
 })
 
 app.post('/register', function (req,res){
